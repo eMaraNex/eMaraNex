@@ -29,7 +29,7 @@ export function HeroSection({ className }: HeroSectionProps) {
           <div className="max-w-4xl mx-auto">
             <Badge
               variant="secondary"
-              className="mb-6 px-6 py-3 bg-gradient-to-r from-emerald-100 to-green-100 dark:from-emerald-900 dark:to-green-900 border-emerald-200 dark:border-emerald-800"
+              className="mb-6 px-6 py-3 mt-3 bg-gradient-to-r from-emerald-100 to-green-100 dark:from-emerald-900 dark:to-green-900 border-emerald-200 dark:border-emerald-800"
             >
               <Rocket className="w-4 h-4 mr-2" />🚀 Multi-Industry SaaS Solutions Available Now
             </Badge>
