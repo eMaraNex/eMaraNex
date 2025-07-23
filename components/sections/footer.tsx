@@ -9,11 +9,11 @@ const footerSections = [
   },
   {
     title: "Company",
-    links: ["About Us", "Careers", "Blog", "Press"],
+    links: ["About Us", "Careers",],
   },
   {
     title: "Support",
-    links: ["Documentation", "Help Center", "Contact Support", "Status Page"],
+    links: [ "Help Center", "Contact Support"],
   },
 ]
 
@@ -47,7 +47,7 @@ export function Footer({ className }: FooterProps) {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 eMaraNex. All rights reserved. Built with ❤️ for modern businesses.</p>
+          <p>&copy; 2025 eMaraNex. All rights reserved. Built with ❤️ for modern businesses.</p>
         </div>
       </div>
     </footer>
