@@ -1,0 +1,5 @@
+deployment:
+    tasks:
+      - export DEPLOYPATH=/home/emaranex/public_html/emaranex/
+      - /bin/cp -R . $DEPLOYPATH
+      - /bin/chmod -R 755 $DEPLOYPATH
