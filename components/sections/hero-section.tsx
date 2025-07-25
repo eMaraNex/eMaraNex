@@ -13,6 +13,10 @@ export function HeroSection({ className }: HeroSectionProps) {
     document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })
   }
 
+  const scrollToContactUs = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
       id="home"
@@ -31,7 +35,8 @@ export function HeroSection({ className }: HeroSectionProps) {
               variant="secondary"
               className="mb-6 px-6 py-3 mt-3 bg-gradient-to-r from-emerald-100 to-green-100 dark:from-emerald-900 dark:to-green-900 border-emerald-200 dark:border-emerald-800"
             >
-              <Rocket className="w-4 h-4 mr-2" />🚀 Multi-Industry SaaS Solutions Available Now
+              <Rocket className="w-4 h-4 mr-2" />
+              🚀 Multi-Industry SaaS Solutions Available Now
             </Badge>
             <h1 className="text-5xl sm:text-7xl font-bold tracking-tight mb-8">
               <span className="bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 bg-clip-text text-transparent">
@@ -43,9 +48,10 @@ export function HeroSection({ className }: HeroSectionProps) {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-              We're a SaaS startup building specialized software solutions for farming, SMEs, healthcare, and more.
-              Subscription-based platforms with powerful features, automated workflows, and industry-specific tools that
-              scale with your business.
+              We're a SaaS startup building specialized software solutions for
+              farming, SMEs, healthcare, and more. Subscription-based platforms
+              with powerful features, automated workflows, and industry-specific
+              tools that scale with your business.
             </p>
 
             {/* Key SaaS benefits */}
@@ -76,30 +82,36 @@ export function HeroSection({ className }: HeroSectionProps) {
               <Button
                 size="lg"
                 variant="outline"
+                onClick={scrollToContactUs}
                 className="text-lg px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-purple-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
                 <Shield className="mr-2 h-5 w-5" />
-                Start Free Trial <ArrowRight className="ml-2 h-5 w-5" />
+                Get Started <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
 
             {/* Trust indicators */}
             <div className="flex flex-col items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="flex">
+                {/* <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star
+                      key={i}
+                      className="w-5 h-5 text-yellow-400 fill-current"
+                    />
                   ))}
-                </div>
-                <span className="text-sm font-medium text-muted-foreground ml-2">4.9/5 from 2,500+ SaaS users</span>
+                </div> */}
+                {/* <span className="text-sm font-medium text-muted-foreground ml-2">
+                  4.2/5 from 100+ SaaS users
+                </span> */}
               </div>
               <p className="text-sm text-muted-foreground font-medium">
-                Join 28,000+ Subscribers Using Our SaaS Solutions
+                Join 100+ Subscribers Using Our SaaS Solutions
               </p>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

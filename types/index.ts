@@ -5,12 +5,12 @@ export interface SaaSProduct {
   description: string
   features: string[]
   category: string
-  pricing: string
+  pricing?: string
   gradient: string
   bgColor: string
   icon: string
   stats: {
-    subscribers: string
+    subscribers?: string
     retention: string
   }
   cta: string

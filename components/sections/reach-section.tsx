@@ -6,9 +6,9 @@ interface ReachSectionProps {
 
 const reachStats = [
   {
-    value: "250,000+",
+    value: "100+",
     label: "Unique Users",
-    description: "15k-20k Unique Users Monthly",
+    description: "Unique Users Monthly",
     gradient: "from-emerald-900 to-green-900",
     border: "border-emerald-700",
     textColor: "text-emerald-300",
@@ -16,9 +16,9 @@ const reachStats = [
     shadow: "hover:shadow-emerald-500/20",
   },
   {
-    value: "4.5M+",
+    value: "1M+",
     label: "Impressions",
-    description: "US/GB, IN, EU Demographics",
+    description: "Demographics",
     gradient: "from-blue-900 to-cyan-900",
     border: "border-blue-700",
     textColor: "text-blue-300",
@@ -26,7 +26,7 @@ const reachStats = [
     shadow: "hover:shadow-blue-500/20",
   },
   {
-    value: "80,000+",
+    value: "10,000+",
     label: "Product Clicks",
     description: "Direct Traffic to Products",
     gradient: "from-purple-900 to-indigo-900",
@@ -36,9 +36,9 @@ const reachStats = [
     shadow: "hover:shadow-purple-500/20",
   },
   {
-    value: "450,000+",
+    value: "50,000+",
     label: "Page Views",
-    description: "25-30k+ Monthly Page Views",
+    description: "Monthly Page Views",
     gradient: "from-orange-900 to-red-900",
     border: "border-orange-700",
     textColor: "text-orange-300",
