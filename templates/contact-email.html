@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form Submission</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      background-color: #f4f4f4;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 24px;
+      background: linear-gradient(145deg, #ffffff, #f8fafc);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      padding: 16px 0;
+      border-bottom: 2px solid #10b981;
+    }
+    .header h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a5f3b;
+    }
+    .content {
+      padding: 24px;
+    }
+    .content p {
+      margin: 12px 0;
+      font-size: 16px;
+      color: #374151;
+    }
+    .label {
+      font-weight: 600;
+      color: #1a5f3b;
+    }
+    .value {
+      color: #4b5563;
+    }
+    .footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 14px;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+      margin-top: 24px;
+    }
+    .footer p {
+      margin: 0;
+    }
+    @media screen and (max-width: 600px) {
+      .container {
+        margin: 10px;
+        padding: 16px;
+      }
+      .header h2 {
+        font-size: 20px;
+      }
+      .content p {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>You Have a New Message!</h2>
+    </div>
+    <div class="content">
+      <p>Hi there! Someone just reached out via your website’s contact form. Here are their details:</p>
+      <p><span class="label">Name:</span> <span class="value">{{firstName}} {{lastName}}</span></p>
+      <p><span class="label">Email:</span> <span class="value">{{email}}</span></p>
+      <p><span class="label">Company:</span> <span class="value">{{company}}</span></p>
+      <p><span class="label">Message:</span> <span class="value">{{message}}</span></p>
+      <p><span class="label">Submitted:</span> <span class="value">{{timestamp}}</span></p>
+    </div>
+    <div class="footer">
+      <p>Automated notification from your website’s contact form.</p>
+    </div>
+  </div>
+</body>
+</html>

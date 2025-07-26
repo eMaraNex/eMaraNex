@@ -1,55 +1,91 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Mail, ArrowRight, CheckCircle, AlertCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { CONTACT_INFO } from "@/lib/constants"
-import { submitContactForm } from "@/app/actions/contact"
-import type { ContactInfo } from "@/types"
+import { useState } from "react";
+import { Mail, ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { CONTACT_INFO } from "@/lib/constants";
+import type { ContactInfo } from "@/types";
+import axios from 'axios';
 
 interface ContactSectionProps {
-  className?: string
-  contactInfo?: ContactInfo[]
+  className?: string;
+  contactInfo?: ContactInfo[];
 }
 
 const businessHours = [
   { day: "Monday - Friday", hours: "8:00 AM - 6:00 PM EAT" },
   { day: "Saturday", hours: "9:00 AM - 2:00 PM EAT" },
   { day: "Sunday", hours: "Closed" },
-]
+];
 
 export function ContactSection({ className, contactInfo = CONTACT_INFO }: ContactSectionProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{
-    success: boolean
-    message: string
-    errors?: string[]
-  } | null>(null)
+    success: boolean;
+    message: string;
+    errors?: string[];
+  } | null>(null);
 
-  async function handleSubmit(formData: FormData) {
-    setIsSubmitting(true)
-    setSubmitResult(null)
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitResult(null);
 
     try {
-      const result = await submitContactForm(formData)
-      setSubmitResult(result)
+      const formData = new FormData(event.currentTarget);
+      const data = {
+        firstName: formData.get("firstName") as string,
+        lastName: formData.get("lastName") as string,
+        email: formData.get("email") as string,
+        company: formData.get("company") as string,
+        message: formData.get("message") as string,
+      };
+      const response = await axios.post("/api/contact", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 30000,
+      });
 
-      // Reset form if successful
-      if (result.success) {
-        const form = document.getElementById("contact-form") as HTMLFormElement
-        form?.reset()
-      }
-    } catch (error) {
       setSubmitResult({
-        success: false,
-        message: "Network error. Please check your connection and try again.",
-      })
+        success: true,
+        message: response.data.message || "Message sent successfully! We'll get back to you soon.",
+      });
+      event.currentTarget.reset();
+
+    } catch (error) {
+      console.error('Form submission error:', error);
+
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          setSubmitResult({
+            success: false,
+            message: error.response.data?.message || "Server error occurred.",
+            errors: error.response.data?.errors,
+          });
+        } else if (error.request) {
+          setSubmitResult({
+            success: false,
+            message: "No response from server. Please check your internet connection.",
+          });
+        } else {
+          setSubmitResult({
+            success: false,
+            message: "An unexpected error occurred. Please try again.",
+          });
+        }
+      } else {
+        setSubmitResult({
+          success: false,
+          message: "Network error. Please check your connection and try again.",
+        });
+      }
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
@@ -91,9 +127,7 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                       {submitResult.errors && (
                         <ul className="mt-2 list-disc list-inside">
                           {submitResult.errors.map((error, index) => (
-                            <li key={index} className="text-sm">
-                              {error}
-                            </li>
+                            <li key={index} className="text-sm">{error}</li>
                           ))}
                         </ul>
                       )}
@@ -101,7 +135,7 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                   </Alert>
                 )}
 
-                <form id="contact-form" action={handleSubmit} className="space-y-6">
+                <form id="contact-form" onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-2 gap-4">
                     <Input name="firstName" placeholder="First Name" className="h-12" required />
                     <Input name="lastName" placeholder="Last Name" className="h-12" required />
@@ -179,5 +213,5 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
         </div>
       </div>
     </section>
-  )
+  );
 }
