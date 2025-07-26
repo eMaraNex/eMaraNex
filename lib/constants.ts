@@ -1,36 +1,36 @@
-import { Users, TrendingUp, Award, Globe, Mail, Phone, MapPin, Flower, Rabbit, Wheat, ShoppingBag } from "lucide-react"
-import type { SaaSProduct, Stat, Partner, Testimonial, ContactInfo, SaaSFeature } from "@/types"
+import { Users, TrendingUp, Award, Globe, Mail, Phone, MapPin, Flower, Rabbit, Wheat, ShoppingBag, Building2, RefreshCw, BarChart3, Zap, Link, Shield } from "lucide-react";
+import type { SaaSProduct, Stat, Partner, Testimonial, ContactInfo, SaaSFeature } from "@/types";
 
 export const SAAS_FEATURES: SaaSFeature[] = [
   {
     title: "Multi-Tenant Architecture",
     description: "Secure, scalable SaaS infrastructure that serves thousands of users across different industries",
-    icon: "🏗️",
+    icon: Building2,
   },
   {
     title: "Real-Time Data Sync",
     description: "Instant data synchronization across all devices and platforms with offline capability",
-    icon: "🔄",
+    icon: RefreshCw,
   },
   {
     title: "Advanced Analytics Dashboard",
     description: "Comprehensive reporting and analytics with customizable dashboards for data-driven decisions",
-    icon: "📊",
+    icon: BarChart3,
   },
   {
     title: "Automated Workflows",
     description: "Smart automation for repetitive tasks, alerts, reminders, and business process optimization",
-    icon: "⚡",
+    icon: Zap,
   },
   {
     title: "API & Integrations",
     description: "Robust APIs and seamless integrations with popular business tools and third-party services",
-    icon: "🔗",
+    icon: Link,
   },
   {
     title: "Enterprise Security",
     description: "Bank-level security with encryption, compliance standards, and regular security audits",
-    icon: "🔒",
+    icon: Shield,
   },
 ]
 
