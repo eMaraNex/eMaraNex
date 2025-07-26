@@ -34,7 +34,7 @@ export const SAAS_FEATURES: SaaSFeature[] = [
   },
 ]
 
-export const SAAS_PRODUCTS: SaaSProduct[] = [
+export const SAAS_PRODUCTS = [
   {
     name: "Sungura Master",
     description:
