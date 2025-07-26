@@ -5,17 +5,17 @@ interface FooterProps {
 const footerSections = [
   {
     title: "Solutions",
-    links: ["AgriTrack Pro", "CosmetiCore", "RetailFlow", "FinanceSync"],
+    links: ["Sungura Master", " Hadassah Scents", "RetailFlow", " Zao "],
   },
   {
     title: "Company",
-    links: ["About Us", "Careers",],
+    links: ["About Us",],
   },
   {
     title: "Support",
-    links: [ "Help Center", "Contact Support"],
+    links: ["Help Center", "Contact Support"],
   },
-]
+];
 
 export function Footer({ className }: FooterProps) {
   return (

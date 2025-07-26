@@ -1,55 +1,131 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Mail, ArrowRight, CheckCircle, AlertCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { CONTACT_INFO } from "@/lib/constants"
-import { submitContactForm } from "@/app/actions/contact"
-import type { ContactInfo } from "@/types"
+import { useState } from "react";
+import { Mail, ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { CONTACT_INFO } from "@/lib/constants";
+import type { ContactInfo } from "@/types";
+import axios from 'axios';
 
 interface ContactSectionProps {
-  className?: string
-  contactInfo?: ContactInfo[]
+  className?: string;
+  contactInfo?: ContactInfo[];
 }
 
 const businessHours = [
   { day: "Monday - Friday", hours: "8:00 AM - 6:00 PM EAT" },
   { day: "Saturday", hours: "9:00 AM - 2:00 PM EAT" },
   { day: "Sunday", hours: "Closed" },
-]
+];
 
 export function ContactSection({ className, contactInfo = CONTACT_INFO }: ContactSectionProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{
-    success: boolean
-    message: string
-    errors?: string[]
-  } | null>(null)
+    success: boolean;
+    message: string;
+    errors?: string[];
+  } | null>(null);
 
-  async function handleSubmit(formData: FormData) {
-    setIsSubmitting(true)
-    setSubmitResult(null)
+  // Form state
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    message: ''
+  });
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Clear form
+  const clearForm = () => {
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      company: '',
+      message: ''
+    });
+  };
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitResult(null);
 
     try {
-      const result = await submitContactForm(formData)
-      setSubmitResult(result)
+      console.log('Submitting form data:', formData);
 
-      // Reset form if successful
-      if (result.success) {
-        const form = document.getElementById("contact-form") as HTMLFormElement
-        form?.reset()
+      const response = await axios.post("/api/contact", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 30000,
+        validateStatus: function (status) {
+          return status < 500;
+        }
+      });
+
+      console.log('Response received:', response.data);
+
+      if (response.data.success) {
+        setSubmitResult({
+          success: true,
+          message: response.data.message || "Message sent successfully! We'll get back to you soon.",
+        });
+        clearForm();
+      } else {
+        setSubmitResult({
+          success: false,
+          message: response.data.message || "Something went wrong. Please try again.",
+          errors: response.data.errors,
+        });
       }
+
     } catch (error) {
-      setSubmitResult({
-        success: false,
-        message: "Network error. Please check your connection and try again.",
-      })
+      console.error('Form submission error:', error);
+
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          console.log('Error response:', error.response.data);
+          setSubmitResult({
+            success: false,
+            message: error.response.data?.message || "Server error occurred.",
+            errors: error.response.data?.errors,
+          });
+        } else if (error.request) {
+          console.log('No response received:', error.request);
+          setSubmitResult({
+            success: false,
+            message: "No response from server. Please check your internet connection.",
+          });
+        } else {
+          console.log('Request setup error:', error.message);
+          setSubmitResult({
+            success: false,
+            message: "An unexpected error occurred. Please try again.",
+          });
+        }
+      } else {
+        console.log('Non-axios error:', error);
+        setSubmitResult({
+          success: false,
+          message: "Network error. Please check your connection and try again.",
+        });
+      }
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
@@ -91,9 +167,7 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                       {submitResult.errors && (
                         <ul className="mt-2 list-disc list-inside">
                           {submitResult.errors.map((error, index) => (
-                            <li key={index} className="text-sm">
-                              {error}
-                            </li>
+                            <li key={index} className="text-sm">{error}</li>
                           ))}
                         </ul>
                       )}
@@ -101,15 +175,46 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                   </Alert>
                 )}
 
-                <form id="contact-form" action={handleSubmit} className="space-y-6">
+                <form id="contact-form" onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-2 gap-4">
-                    <Input name="firstName" placeholder="First Name" className="h-12" required />
-                    <Input name="lastName" placeholder="Last Name" className="h-12" required />
+                    <Input
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      placeholder="First Name"
+                      className="h-12"
+                      required
+                    />
+                    <Input
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      placeholder="Last Name"
+                      className="h-12"
+                      required
+                    />
                   </div>
-                  <Input name="email" placeholder="Business Email" type="email" className="h-12" required />
-                  <Input name="company" placeholder="Company Name" className="h-12" required />
+                  <Input
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Business Email"
+                    type="email"
+                    className="h-12"
+                    required
+                  />
+                  <Input
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    placeholder="Company Name"
+                    className="h-12"
+                    required
+                  />
                   <Textarea
                     name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     placeholder="Which SaaS solution interests you most? (Sungura Master for rabbit farming, Hadassah Scents for cosmetics, Zao for agriculture, or RetailFlow for retail)"
                     className="min-h-[120px]"
                     required
@@ -179,5 +284,5 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
         </div>
       </div>
     </section>
-  )
+  );
 }

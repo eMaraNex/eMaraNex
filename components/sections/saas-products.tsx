@@ -76,7 +76,7 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                   <h3 className="text-2xl font-bold group-hover:text-emerald-600 transition-colors">{product.name}</h3>
                   <div className="text-right">
                     <div className="text-lg font-bold text-emerald-600">{product.pricing}</div>
-                    <div className="text-xs text-muted-foreground">per user</div>
+                    {/* <div className="text-xs text-muted-foreground">per user</div> */}
                   </div>
                 </div>
                 <p className="text-muted-foreground mb-6 leading-relaxed">{product.description}</p>
