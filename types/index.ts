@@ -8,7 +8,7 @@ export interface SaaSProduct {
   pricing?: string
   gradient: string
   bgColor: string
-  icon: string
+  icon: React.ComponentType<any>;
   stats: {
     subscribers?: string
     retention: string

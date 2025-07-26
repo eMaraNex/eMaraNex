@@ -1,4 +1,4 @@
-import { Users, TrendingUp, Award, Globe, Mail, Phone, MapPin } from "lucide-react"
+import { Users, TrendingUp, Award, Globe, Mail, Phone, MapPin, Flower, Rabbit, Wheat, ShoppingBag } from "lucide-react"
 import type { SaaSProduct, Stat, Partner, Testimonial, ContactInfo, SaaSFeature } from "@/types"
 
 export const SAAS_FEATURES: SaaSFeature[] = [
@@ -56,7 +56,7 @@ export const SAAS_PRODUCTS: SaaSProduct[] = [
     gradient: "from-emerald-500 via-green-500 to-teal-500",
     bgColor:
       "bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950 dark:to-green-950",
-    icon: "🐰",
+    icon: Rabbit,
     stats: { subscribers: "100+", retention: "98%" },
     cta: "Get Started Today",
     keywords: [
@@ -67,7 +67,7 @@ export const SAAS_PRODUCTS: SaaSProduct[] = [
     ],
   },
   {
-    name: "Hadassah Scents",
+    name: "Cosmos Scents",
     description:
       "Advanced inventory and business management SaaS for cosmetics and fragrance businesses. Track product batches, manage inventory levels, monitor sales performance, and streamline your beauty business operations.",
     features: [
@@ -87,7 +87,7 @@ export const SAAS_PRODUCTS: SaaSProduct[] = [
     gradient: "from-pink-500 via-rose-500 to-purple-500",
     bgColor:
       "bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-950 dark:to-rose-950",
-    icon: "🌸",
+    icon: Flower,
     stats: { subscribers: "50+", retention: "96%" },
     cta: "Get Started Today",
     keywords: [
@@ -118,7 +118,7 @@ export const SAAS_PRODUCTS: SaaSProduct[] = [
     gradient: "from-amber-500 via-orange-500 to-red-500",
     bgColor:
       "bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950",
-    icon: "🌾",
+    icon: Wheat,
     stats: { subscribers: "80+", retention: "97%" },
     cta: "Get Started Today",
     keywords: [
@@ -149,7 +149,7 @@ export const SAAS_PRODUCTS: SaaSProduct[] = [
     gradient: "from-blue-500 via-cyan-500 to-indigo-500",
     bgColor:
       "bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950 dark:to-cyan-950",
-    icon: "🛍️",
+    icon: ShoppingBag,
     stats: { subscribers: "120+", retention: "95%" },
     cta: "Get Started Today",
     keywords: [
@@ -162,10 +162,10 @@ export const SAAS_PRODUCTS: SaaSProduct[] = [
 ];
 
 export const STATS: Stat[] = [
-  { label: "Active SaaS Subscribers", value: "11,600+", icon: Users, color: "text-emerald-500" },
+  { label: "Active SaaS Subscribers", value: "16+", icon: Users, color: "text-emerald-500" },
   { label: "Customer Retention Rate", value: "97%", icon: TrendingUp, color: "text-blue-500" },
-  { label: "SaaS Industry Awards", value: "12", icon: Award, color: "text-purple-500" },
-  { label: "Countries Served", value: "28", icon: Globe, color: "text-orange-500" },
+  { label: "Monthly Active Users", value: "100+", icon: Award, color: "text-purple-500" },
+  { label: "Counties Served", value: "8", icon: Globe, color: "text-orange-500" },
 ]
 
 export const PARTNERS: Partner[] = [
@@ -198,7 +198,7 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "Hadassah Scents helped our cosmetics business reduce inventory waste by 35% and improve profit margins significantly. The batch tracking and expiry management features are game-changers.",
+      "Cosmos Scents helped our cosmetics business reduce inventory waste by 35% and improve profit margins significantly. The batch tracking and expiry management features are game-changers.",
     author: "Grace Wanjiku",
     role: "Beauty Business Owner, Wanjiku Cosmetics",
     avatar: "GW",
@@ -234,13 +234,13 @@ export const CONTACT_INFO: ContactInfo[] = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@emaranex.com",
+    value: "info@emaranex.com",
     gradient: "from-emerald-500 to-green-500",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+254 712 345 678",
+    value: "+254 702 898 390 | +254 711 985 548",
     gradient: "from-blue-500 to-cyan-500",
   },
   {

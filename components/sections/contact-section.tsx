@@ -215,7 +215,7 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="Which SaaS solution interests you most? (Sungura Master for rabbit farming, Hadassah Scents for cosmetics, Zao for agriculture, or RetailFlow for retail)"
+                    placeholder="Which SaaS solution interests you most? (Sungura Master for rabbit farming, Cosmos Scents for cosmetics, Zao for agriculture, or RetailFlow for retail)"
                     className="min-h-[120px]"
                     required
                   />
@@ -270,7 +270,7 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                   🐰 <strong>Sungura Master</strong> - Rabbit breeding & farm management
                 </li>
                 <li>
-                  🌸 <strong>Hadassah Scents</strong> - Cosmetics & beauty business management
+                  🌸 <strong>Cosmos Scents</strong> - Cosmetics & beauty business management
                 </li>
                 <li>
                   🌾 <strong>Zao</strong> - Comprehensive agricultural management

@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ExternalLink, ArrowRight, ChevronLeft, ChevronRight, Rocket } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { SAAS_PRODUCTS } from "@/lib/constants"
-import type { SaaSProduct } from "@/types"
+import { useState } from "react";
+import { ExternalLink, ArrowRight, ChevronLeft, ChevronRight, Rocket } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { SAAS_PRODUCTS } from "@/lib/constants";
+import type { SaaSProduct } from "@/types";
 
 interface SaaSProductsProps {
-  className?: string
-  products?: SaaSProduct[]
+  className?: string;
+  products?: SaaSProduct[];
 }
 
 export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProductsProps) {
-  const [currentProductIndex, setCurrentProductIndex] = useState(0)
+  const [currentProductIndex, setCurrentProductIndex] = useState(0);
 
   const nextProduct = () => {
-    setCurrentProductIndex((prev) => (prev + 1) % products.length)
-  }
+    setCurrentProductIndex((prev) => (prev + 1) % products.length);
+  };
 
   const prevProduct = () => {
-    setCurrentProductIndex((prev) => (prev - 1 + products.length) % products.length)
-  }
+    setCurrentProductIndex((prev) => (prev - 1 + products.length) % products.length);
+  };
 
   return (
     <section
@@ -56,7 +56,9 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                 <div className={`h-48 bg-gradient-to-br ${product.gradient} relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
                     <div className="text-white text-center">
-                      <div className="text-6xl mb-4 group-hover:animate-float">{product.icon}</div>
+                      <div className="text-6xl mb-4 group-hover:animate-float">
+                        <product.icon className="w-16 h-16" />
+                      </div>
                       <div className="text-2xl font-bold mb-2">{product.name}</div>
                       <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
                         {product.category}
@@ -75,7 +77,7 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-2xl font-bold group-hover:text-emerald-600 transition-colors">{product.name}</h3>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-emerald-600">{product.pricing}</div>
+                    <div className="text-lg font-bold text-emerald-600">{product.pricing || "Contact for Pricing"}</div>
                     {/* <div className="text-xs text-muted-foreground">per user</div> */}
                   </div>
                 </div>
@@ -133,7 +135,9 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                         <div className={`h-48 bg-gradient-to-br ${product.gradient} relative overflow-hidden`}>
                           <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
                             <div className="text-white text-center">
-                              <div className="text-6xl mb-4 group-hover:animate-float">{product.icon}</div>
+                              <div className="text-6xl mb-4 group-hover:animate-float">
+                                <product.icon className="w-16 h-16" />
+                              </div>
                               <div className="text-2xl font-bold mb-2">{product.name}</div>
                               <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
                                 {product.category}
@@ -156,7 +160,7 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                             {product.name}
                           </h3>
                           <div className="text-right">
-                            <div className="text-sm font-bold text-emerald-600">{product.pricing}</div>
+                            <div className="text-sm font-bold text-emerald-600">{product.pricing || "Contact for Pricing"}</div>
                           </div>
                         </div>
                         <p className="text-muted-foreground mb-4 leading-relaxed text-sm">{product.description}</p>
@@ -212,9 +216,8 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
               {products.map((_, index) => (
                 <button
                   key={index}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentProductIndex ? "bg-emerald-500 w-6" : "bg-gray-300 dark:bg-gray-600"
-                  }`}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentProductIndex ? "bg-emerald-500 w-6" : "bg-gray-300 dark:bg-gray-600"
+                    }`}
                   onClick={() => setCurrentProductIndex(index)}
                 />
               ))}
@@ -242,5 +245,5 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
         </div>
       </div>
     </section>
-  )
+  );
 }
