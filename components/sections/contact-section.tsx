@@ -30,55 +30,95 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
     errors?: string[];
   } | null>(null);
 
+  // Form state
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    message: ''
+  });
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Clear form
+  const clearForm = () => {
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      company: '',
+      message: ''
+    });
+  };
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
     setSubmitResult(null);
 
     try {
-      const formData = new FormData(event.currentTarget);
-      const data = {
-        firstName: formData.get("firstName") as string,
-        lastName: formData.get("lastName") as string,
-        email: formData.get("email") as string,
-        company: formData.get("company") as string,
-        message: formData.get("message") as string,
-      };
-      const response = await axios.post("/api/contact", data, {
+      console.log('Submitting form data:', formData);
+
+      const response = await axios.post("/api/contact", formData, {
         headers: {
           "Content-Type": "application/json",
         },
         timeout: 30000,
+        validateStatus: function (status) {
+          return status < 500;
+        }
       });
 
-      setSubmitResult({
-        success: true,
-        message: response.data.message || "Message sent successfully! We'll get back to you soon.",
-      });
-      event.currentTarget.reset();
+      console.log('Response received:', response.data);
+
+      if (response.data.success) {
+        setSubmitResult({
+          success: true,
+          message: response.data.message || "Message sent successfully! We'll get back to you soon.",
+        });
+        clearForm();
+      } else {
+        setSubmitResult({
+          success: false,
+          message: response.data.message || "Something went wrong. Please try again.",
+          errors: response.data.errors,
+        });
+      }
 
     } catch (error) {
       console.error('Form submission error:', error);
 
       if (axios.isAxiosError(error)) {
         if (error.response) {
+          console.log('Error response:', error.response.data);
           setSubmitResult({
             success: false,
             message: error.response.data?.message || "Server error occurred.",
             errors: error.response.data?.errors,
           });
         } else if (error.request) {
+          console.log('No response received:', error.request);
           setSubmitResult({
             success: false,
             message: "No response from server. Please check your internet connection.",
           });
         } else {
+          console.log('Request setup error:', error.message);
           setSubmitResult({
             success: false,
             message: "An unexpected error occurred. Please try again.",
           });
         }
       } else {
+        console.log('Non-axios error:', error);
         setSubmitResult({
           success: false,
           message: "Network error. Please check your connection and try again.",
@@ -137,13 +177,44 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
 
                 <form id="contact-form" onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-2 gap-4">
-                    <Input name="firstName" placeholder="First Name" className="h-12" required />
-                    <Input name="lastName" placeholder="Last Name" className="h-12" required />
+                    <Input
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      placeholder="First Name"
+                      className="h-12"
+                      required
+                    />
+                    <Input
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      placeholder="Last Name"
+                      className="h-12"
+                      required
+                    />
                   </div>
-                  <Input name="email" placeholder="Business Email" type="email" className="h-12" required />
-                  <Input name="company" placeholder="Company Name" className="h-12" required />
+                  <Input
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Business Email"
+                    type="email"
+                    className="h-12"
+                    required
+                  />
+                  <Input
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    placeholder="Company Name"
+                    className="h-12"
+                    required
+                  />
                   <Textarea
                     name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     placeholder="Which SaaS solution interests you most? (Sungura Master for rabbit farming, Hadassah Scents for cosmetics, Zao for agriculture, or RetailFlow for retail)"
                     className="min-h-[120px]"
                     required
