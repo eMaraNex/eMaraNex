@@ -27,7 +27,7 @@ export function AboutSection({ className }: AboutSectionProps) {
               About eMaraNex
             </h2>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              eMaraNex is a SaaS startup based in East Africa, specializing in building industry-specific software
+              eMaraNex is a SaaS startup based in Nairobi, Kenya, specializing in building industry-specific software
               solutions that solve real business challenges. We focus on creating affordable, subscription-based
               platforms for farmers, beauty businesses, and SMEs.
             </p>

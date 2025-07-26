@@ -59,6 +59,7 @@ export const SAAS_PRODUCTS = [
     icon: Rabbit,
     stats: { subscribers: "100+", retention: "98%" },
     cta: "Get Started Today",
+    link: "https://sunguramaster.emaranex.com",
     keywords: [
       "rabbit breeding software",
       "rabbit farm management",
@@ -90,6 +91,7 @@ export const SAAS_PRODUCTS = [
     icon: Flower,
     stats: { subscribers: "50+", retention: "96%" },
     cta: "Get Started Today",
+    link: "https://hadassahscents.vercel.app",
     keywords: [
       "cosmetics business management",
       "beauty inventory software",
@@ -121,6 +123,7 @@ export const SAAS_PRODUCTS = [
     icon: Wheat,
     stats: { subscribers: "80+", retention: "97%" },
     cta: "Get Started Today",
+    link: "https://zaolink.vercel.app",
     keywords: [
       "farm management software",
       "agricultural SaaS",
@@ -152,6 +155,7 @@ export const SAAS_PRODUCTS = [
     icon: ShoppingBag,
     stats: { subscribers: "120+", retention: "95%" },
     cta: "Get Started Today",
+    link: "#", // Add your RetailFlow link here when available
     keywords: [
       "retail management SaaS",
       "SME solutions",

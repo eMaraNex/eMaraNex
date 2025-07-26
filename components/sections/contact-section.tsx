@@ -244,7 +244,32 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                     </div>
                     <div>
                       <div className="font-semibold text-lg">{info.label}</div>
-                      <div className="text-muted-foreground whitespace-pre-line">{info.value}</div>
+                      <div className="text-muted-foreground whitespace-pre-line">
+                        {info.label === "Email" ? (
+                          <a
+                            href={`mailto:${info.value}`}
+                            className="text-emerald-600 hover:text-emerald-700 hover:underline transition-colors cursor-pointer"
+                          >
+                            {info.value}
+                          </a>
+                        ) :
+                          info.label === "Phone" ? (
+                            <div className="space-y-1">
+                              {info.value.split(" | ").map((phoneNumber, phoneIndex) => (
+                                <div key={phoneIndex}>
+                                  <a
+                                    href={`tel:${phoneNumber.replace(/\s+/g, "")}`}
+                                    className="text-emerald-600 hover:text-emerald-700 hover:underline transition-colors cursor-pointer"
+                                  >
+                                    {phoneNumber.trim()}
+                                  </a>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            info.value
+                          )}
+                      </div>
                     </div>
                   </div>
                 ))}

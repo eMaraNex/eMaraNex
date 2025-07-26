@@ -23,6 +23,12 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
     setCurrentProductIndex((prev) => (prev - 1 + products.length) % products.length);
   };
 
+  const handleProductClick = (productLink: string) => {
+    if (productLink && productLink !== "#") {
+      window.open(productLink, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <section
       id="products"
@@ -52,6 +58,7 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
               <Card
                 key={index}
                 className={`border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden group cursor-pointer ${product.bgColor}`}
+                onClick={() => handleProductClick(product.link)}
               >
                 <div className="relative">
                   <div
@@ -152,6 +159,10 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                             index === 2 ? `linear-gradient(to right, rgb(245 158 11), rgb(249 115 22), rgb(239 68 68))` :
                               `linear-gradient(to right, rgb(59 130 246), rgb(6 182 212), rgb(99 102 241))`
                       }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleProductClick(product.link);
+                      }}
                     >
                       <ExternalLink className="mr-2 h-4 w-4" />
                       {product.cta}
@@ -160,6 +171,10 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                       variant="outline"
                       size="icon"
                       className="hover:bg-emerald-50 dark:hover:bg-emerald-950 hover:border-emerald-300 dark:hover:border-emerald-700 bg-transparent"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleProductClick(product.link);
+                      }}
                     >
                       <ArrowRight className="h-4 w-4" />
                     </Button>
@@ -184,6 +199,7 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                     <div key={index} className="w-full flex-shrink-0 px-2">
                       <Card
                         className={`border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden group cursor-pointer ${product.bgColor}`}
+                        onClick={() => handleProductClick(product.link)}
                       >
                         <div className="relative">
                           <div
@@ -249,6 +265,10 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                                 index === 1 ? `linear-gradient(to right, rgb(236 72 153), rgb(244 63 94), rgb(168 85 247))` :
                                   index === 2 ? `linear-gradient(to right, rgb(245 158 11), rgb(249 115 22), rgb(239 68 68))` :
                                     `linear-gradient(to right, rgb(59 130 246), rgb(6 182 212), rgb(99 102 241))`
+                            }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleProductClick(product.link);
                             }}
                           >
                             <ExternalLink className="mr-2 h-4 w-4" />
