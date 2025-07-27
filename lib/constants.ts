@@ -1,4 +1,4 @@
-import { Users, TrendingUp, Award, Globe, Mail, Phone, MapPin, Flower, Rabbit, Wheat, ShoppingBag, Building2, RefreshCw, BarChart3, Zap, Link, Shield } from "lucide-react";
+import { Users, TrendingUp, Award, Globe, Mail, Phone, MapPin, Flower, Rabbit, Wheat, ShoppingBag, Building2, RefreshCw, BarChart3, Zap, Link, Shield, Stethoscope, GraduationCap, Truck, Factory } from "lucide-react";
 import type { SaaSProduct, Stat, Partner, Testimonial, ContactInfo, SaaSFeature } from "@/types";
 
 export const SAAS_FEATURES: SaaSFeature[] = [
@@ -260,25 +260,25 @@ export const UPCOMING_INDUSTRIES = [
   {
     name: "Healthcare SaaS",
     description: "Patient management, appointment scheduling, and medical records",
-    icon: "🏥",
+    icon: Stethoscope,
     status: "Coming Q2 2024",
   },
   {
     name: "Education SaaS",
     description: "Student management, course tracking, and learning analytics",
-    icon: "🎓",
+    icon: GraduationCap,
     status: "In Development",
   },
   {
     name: "Logistics SaaS",
     description: "Fleet management, delivery tracking, and route optimization",
-    icon: "🚛",
+    icon: Truck,
     status: "Planning Phase",
   },
   {
     name: "Manufacturing SaaS",
     description: "Production planning, quality control, and supply chain management",
-    icon: "🏭",
+    icon: Factory,
     status: "Research Phase",
   },
 ]
