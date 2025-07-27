@@ -66,8 +66,7 @@ export const metadata: Metadata = {
   other: {
     "google-site-verification": "your-google-verification-code",
     "msvalidate.01": "your-bing-verification-code",
-  },
-    generator: 'v0.dev'
+  }
 }
 
 export default function RootLayout({
@@ -97,8 +96,8 @@ export default function RootLayout({
         <meta name="color-scheme" content="light dark" />
 
         {/* Additional SEO meta tags */}
-        <meta name="geo.region" content="US" />
-        <meta name="geo.placename" content="United States" />
+        <meta name="geo.region" content="KE" />
+        <meta name="geo.placename" content="Kenya" />
         <meta name="language" content="English" />
         <meta name="distribution" content="global" />
         <meta name="rating" content="general" />

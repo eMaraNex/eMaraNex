@@ -5,7 +5,7 @@ interface FooterProps {
 const footerSections = [
   {
     title: "Solutions",
-    links: ["Sungura Master", " Hadassah Scents", "RetailFlow", " Zao "],
+    links: ["Sungura Master", " Cosmos Scents", "RetailFlow", " Zao "],
   },
   {
     title: "Company",

@@ -1,3 +1,4 @@
+import { LucideIcon } from "lucide-react"
 import type React from "react"
 
 export interface SaaSProduct {
@@ -8,12 +9,13 @@ export interface SaaSProduct {
   pricing?: string
   gradient: string
   bgColor: string
-  icon: string
+  icon: LucideIcon
   stats: {
     subscribers?: string
     retention: string
   }
   cta: string
+  link: string
   keywords: string[]
 }
 
@@ -47,7 +49,7 @@ export interface ContactInfo {
 export interface SaaSFeature {
   title: string
   description: string
-  icon: string
+  icon: LucideIcon
 }
 
 export interface UpcomingIndustry {

@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { SAAS_FEATURES } from "@/lib/constants"
 import type { SaaSFeature } from "@/types"
+import React from "react"
 
 interface SaaSFeaturesProps {
   className?: string
@@ -22,24 +23,30 @@ export function SaaSFeatures({ className, features = SAAS_FEATURES }: SaaSFeatur
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 group"
-            >
-              <CardHeader className="pb-4">
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl mb-4 group-hover:animate-float shadow-lg text-2xl">
-                  {feature.icon}
-                </div>
-                <CardTitle className="text-xl group-hover:text-emerald-600 transition-colors">
-                  {feature.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <Card
+                key={index}
+                className="border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 group"
+              >
+                <CardHeader className="pb-4 flex flex-col items-center">
+                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl mb-4 group-hover:animate-bounce shadow-lg">
+                    {React.createElement(IconComponent as any, {
+                      className: "h-8 w-8 text-white flex items-center justify-center",
+                      size: 32
+                    })}
+                  </div>
+                  <CardTitle className="text-xl group-hover:text-emerald-600 transition-colors">
+                    {feature.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* SaaS Benefits */}

@@ -215,7 +215,7 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="Which SaaS solution interests you most? (Sungura Master for rabbit farming, Hadassah Scents for cosmetics, Zao for agriculture, or RetailFlow for retail)"
+                    placeholder="Which SaaS solution interests you most? (Sungura Master for rabbit farming, Cosmos Scents for cosmetics, Zao for agriculture, or RetailFlow for retail)"
                     className="min-h-[120px]"
                     required
                   />
@@ -244,7 +244,32 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                     </div>
                     <div>
                       <div className="font-semibold text-lg">{info.label}</div>
-                      <div className="text-muted-foreground whitespace-pre-line">{info.value}</div>
+                      <div className="text-muted-foreground whitespace-pre-line">
+                        {info.label === "Email" ? (
+                          <a
+                            href={`mailto:${info.value}`}
+                            className="text-emerald-600 hover:text-emerald-700 hover:underline transition-colors cursor-pointer"
+                          >
+                            {info.value}
+                          </a>
+                        ) :
+                          info.label === "Phone" ? (
+                            <div className="space-y-1">
+                              {info.value.split(" | ").map((phoneNumber, phoneIndex) => (
+                                <div key={phoneIndex}>
+                                  <a
+                                    href={`tel:${phoneNumber.replace(/\s+/g, "")}`}
+                                    className="text-emerald-600 hover:text-emerald-700 hover:underline transition-colors cursor-pointer"
+                                  >
+                                    {phoneNumber.trim()}
+                                  </a>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            info.value
+                          )}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -270,7 +295,7 @@ export function ContactSection({ className, contactInfo = CONTACT_INFO }: Contac
                   🐰 <strong>Sungura Master</strong> - Rabbit breeding & farm management
                 </li>
                 <li>
-                  🌸 <strong>Hadassah Scents</strong> - Cosmetics & beauty business management
+                  🌸 <strong>Cosmos Scents</strong> - Cosmetics & beauty business management
                 </li>
                 <li>
                   🌾 <strong>Zao</strong> - Comprehensive agricultural management
