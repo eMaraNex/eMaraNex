@@ -27,13 +27,13 @@ export function AboutSection({ className }: AboutSectionProps) {
               About eMaraNex
             </h2>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              eMaraNex is a SaaS startup based in East Africa, specializing in building industry-specific software
+              eMaraNex is a SaaS startup based in Nairobi, Kenya, specializing in building industry-specific software
               solutions that solve real business challenges. We focus on creating affordable, subscription-based
               platforms for farmers, beauty businesses, and SMEs.
             </p>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               Our mission is to democratize access to powerful business management tools through our SaaS products:
-              Sungura Master for rabbit farming, Hadassah Scents for cosmetics businesses, Zao for comprehensive
+              Sungura Master for rabbit farming, Cosmos Scents for cosmetics businesses, Zao for comprehensive
               agriculture, and RetailFlow for retail operations.
             </p>
             <div className="space-y-4">
@@ -52,7 +52,7 @@ export function AboutSection({ className }: AboutSectionProps) {
                   4
                 </div>
                 <div className="text-2xl font-semibold mb-2">Active SaaS Products</div>
-                <div className="text-muted-foreground text-lg">Serving 11,600+ subscribers</div>
+                <div className="text-muted-foreground text-lg">Serving 16+ subscribers</div>
               </div>
             </div>
             <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-emerald-400 to-green-400 rounded-full opacity-20 animate-float"></div>

@@ -1,28 +1,33 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ExternalLink, ArrowRight, ChevronLeft, ChevronRight, Rocket } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { SAAS_PRODUCTS } from "@/lib/constants"
-import type { SaaSProduct } from "@/types"
+import { useState } from "react";
+import { ExternalLink, ArrowRight, ChevronLeft, ChevronRight, Rocket } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { SAAS_PRODUCTS } from "@/lib/constants";
 
 interface SaaSProductsProps {
-  className?: string
-  products?: SaaSProduct[]
+  className?: string;
+  products?: any[];
 }
 
 export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProductsProps) {
-  const [currentProductIndex, setCurrentProductIndex] = useState(0)
+  const [currentProductIndex, setCurrentProductIndex] = useState(0);
 
   const nextProduct = () => {
-    setCurrentProductIndex((prev) => (prev + 1) % products.length)
-  }
+    setCurrentProductIndex((prev) => (prev + 1) % products.length);
+  };
 
   const prevProduct = () => {
-    setCurrentProductIndex((prev) => (prev - 1 + products.length) % products.length)
-  }
+    setCurrentProductIndex((prev) => (prev - 1 + products.length) % products.length);
+  };
+
+  const handleProductClick = (productLink: string) => {
+    if (productLink && productLink !== "#") {
+      window.open(productLink, "_blank", "noopener,noreferrer");
+    }
+  };
 
   return (
     <section
@@ -47,73 +52,137 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
 
         {/* Desktop Grid */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-8">
-          {products.map((product, index) => (
-            <Card
-              key={index}
-              className={`border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden group cursor-pointer ${product.bgColor}`}
-            >
-              <div className="relative">
-                <div className={`h-48 bg-gradient-to-br ${product.gradient} relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                    <div className="text-white text-center">
-                      <div className="text-6xl mb-4 group-hover:animate-float">{product.icon}</div>
-                      <div className="text-2xl font-bold mb-2">{product.name}</div>
-                      <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
-                        {product.category}
+          {products.map((product, index) => {
+            const IconComponent = product.icon;
+            return (
+              <Card
+                key={index}
+                className={`border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden group cursor-pointer ${product.bgColor}`}
+                onClick={() => handleProductClick(product.link)}
+              >
+                <div className="relative">
+                  <div
+                    className="h-48 relative overflow-hidden"
+                    style={{
+                      background: `linear-gradient(to bottom right, rgb(16 185 129), rgb(34 197 94), rgb(20 184 166))`
+                    }}
+                  >
+                    {/* Sungura Master - Emerald to Green to Teal */}
+                    {index === 0 && (
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background: `linear-gradient(to bottom right, rgb(16 185 129), rgb(34 197 94), rgb(20 184 166))`
+                        }}
+                      />
+                    )}
+
+                    {/* Cosmos Scents - Pink to Rose to Purple */}
+                    {index === 1 && (
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background: `linear-gradient(to bottom right, rgb(236 72 153), rgb(244 63 94), rgb(168 85 247))`
+                        }}
+                      />
+                    )}
+
+                    {/* Zao - Amber to Orange to Red */}
+                    {index === 2 && (
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background: `linear-gradient(to bottom right, rgb(245 158 11), rgb(249 115 22), rgb(239 68 68))`
+                        }}
+                      />
+                    )}
+
+                    {/* RetailFlow - Blue to Cyan to Indigo */}
+                    {index === 3 && (
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background: `linear-gradient(to bottom right, rgb(59 130 246), rgb(6 182 212), rgb(99 102 241))`
+                        }}
+                      />
+                    )}
+
+                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <div className="text-6xl mb-4 group-hover:animate-bounce">
+                          <IconComponent className="w-16 h-16 mx-auto" />
+                        </div>
+                        <div className="text-2xl font-bold mb-2">{product.name}</div>
+                        <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+                          {product.category}
+                        </Badge>
+                      </div>
+                    </div>
+                    <div className="absolute top-4 right-4 flex gap-2">
+                      <Badge className="bg-white/20 text-white border-white/30">{product.stats.subscribers}</Badge>
+                      <Badge className="bg-white/20 text-white border-white/30">
+                        {product.stats.retention} retention
                       </Badge>
                     </div>
                   </div>
-                  <div className="absolute top-4 right-4 flex gap-2">
-                    <Badge className="bg-white/20 text-white border-white/30">{product.stats.subscribers}</Badge>
-                    <Badge className="bg-white/20 text-white border-white/30">
-                      {product.stats.retention} retention
-                    </Badge>
-                  </div>
                 </div>
-              </div>
-              <CardContent className="p-8">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-bold group-hover:text-emerald-600 transition-colors">{product.name}</h3>
-                  <div className="text-right">
-                    <div className="text-lg font-bold text-emerald-600">{product.pricing}</div>
-                    {/* <div className="text-xs text-muted-foreground">per user</div> */}
+                <CardContent className="p-8">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-2xl font-bold group-hover:text-emerald-600 transition-colors">{product.name}</h3>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-emerald-600">{product.pricing || "Contact for Pricing"}</div>
+                    </div>
                   </div>
-                </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed">{product.description}</p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {product.features.slice(0, 6).map((feature, featureIndex) => (
-                    <Badge
-                      key={featureIndex}
-                      variant="outline"
-                      className="text-xs bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950 dark:to-green-950 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900 transition-colors"
+                  <p className="text-muted-foreground mb-6 leading-relaxed">{product.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {product.features.slice(0, 6).map((feature: any, featureIndex: any) => (
+                      <Badge
+                        key={featureIndex}
+                        variant="outline"
+                        className="text-xs bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950 dark:to-green-950 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900 transition-colors"
+                      >
+                        {feature}
+                      </Badge>
+                    ))}
+                    {product.features.length > 6 && (
+                      <Badge variant="outline" className="text-xs">
+                        +{product.features.length - 6} more features
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="flex gap-3">
+                    <Button
+                      className="flex-1 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                      style={{
+                        background: index === 0 ? `linear-gradient(to right, rgb(16 185 129), rgb(34 197 94), rgb(20 184 166))` :
+                          index === 1 ? `linear-gradient(to right, rgb(236 72 153), rgb(244 63 94), rgb(168 85 247))` :
+                            index === 2 ? `linear-gradient(to right, rgb(245 158 11), rgb(249 115 22), rgb(239 68 68))` :
+                              `linear-gradient(to right, rgb(59 130 246), rgb(6 182 212), rgb(99 102 241))`
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleProductClick(product.link);
+                      }}
                     >
-                      {feature}
-                    </Badge>
-                  ))}
-                  {product.features.length > 6 && (
-                    <Badge variant="outline" className="text-xs">
-                      +{product.features.length - 6} more features
-                    </Badge>
-                  )}
-                </div>
-                <div className="flex gap-3">
-                  <Button
-                    className={`flex-1 bg-gradient-to-r ${product.gradient} hover:opacity-90 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
-                  >
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    {product.cta}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="hover:bg-emerald-50 dark:hover:bg-emerald-950 hover:border-emerald-300 dark:hover:border-emerald-700 bg-transparent"
-                  >
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      {product.cta}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="hover:bg-emerald-50 dark:hover:bg-emerald-950 hover:border-emerald-300 dark:hover:border-emerald-700 bg-transparent"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleProductClick(product.link);
+                      }}
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* Mobile Carousel */}
@@ -124,68 +193,92 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentProductIndex * 100}%)` }}
               >
-                {products.map((product, index) => (
-                  <div key={index} className="w-full flex-shrink-0 px-2">
-                    <Card
-                      className={`border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden group cursor-pointer ${product.bgColor}`}
-                    >
-                      <div className="relative">
-                        <div className={`h-48 bg-gradient-to-br ${product.gradient} relative overflow-hidden`}>
-                          <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                            <div className="text-white text-center">
-                              <div className="text-6xl mb-4 group-hover:animate-float">{product.icon}</div>
-                              <div className="text-2xl font-bold mb-2">{product.name}</div>
-                              <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
-                                {product.category}
+                {products.map((product, index) => {
+                  const IconComponent = product.icon;
+                  return (
+                    <div key={index} className="w-full flex-shrink-0 px-2">
+                      <Card
+                        className={`border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden group cursor-pointer ${product.bgColor}`}
+                        onClick={() => handleProductClick(product.link)}
+                      >
+                        <div className="relative">
+                          <div
+                            className="h-48 relative overflow-hidden"
+                            style={{
+                              background: index === 0 ? `linear-gradient(to bottom right, rgb(16 185 129), rgb(34 197 94), rgb(20 184 166))` :
+                                index === 1 ? `linear-gradient(to bottom right, rgb(236 72 153), rgb(244 63 94), rgb(168 85 247))` :
+                                  index === 2 ? `linear-gradient(to bottom right, rgb(245 158 11), rgb(249 115 22), rgb(239 68 68))` :
+                                    `linear-gradient(to bottom right, rgb(59 130 246), rgb(6 182 212), rgb(99 102 241))`
+                            }}
+                          >
+                            <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                              <div className="text-white text-center">
+                                <div className="text-6xl mb-4 group-hover:animate-bounce">
+                                  <IconComponent className="w-16 h-16 mx-auto" />
+                                </div>
+                                <div className="text-2xl font-bold mb-2">{product.name}</div>
+                                <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+                                  {product.category}
+                                </Badge>
+                              </div>
+                            </div>
+                            <div className="absolute top-4 right-4 flex flex-col gap-2">
+                              <Badge className="bg-white/20 text-white border-white/30 text-xs">
+                                {product.stats.subscribers}
+                              </Badge>
+                              <Badge className="bg-white/20 text-white border-white/30 text-xs">
+                                {product.stats.retention}
                               </Badge>
                             </div>
                           </div>
-                          <div className="absolute top-4 right-4 flex flex-col gap-2">
-                            <Badge className="bg-white/20 text-white border-white/30 text-xs">
-                              {product.stats.subscribers}
-                            </Badge>
-                            <Badge className="bg-white/20 text-white border-white/30 text-xs">
-                              {product.stats.retention}
-                            </Badge>
+                        </div>
+                        <CardContent className="p-6">
+                          <div className="flex justify-between items-start mb-4">
+                            <h3 className="text-xl font-bold group-hover:text-emerald-600 transition-colors">
+                              {product.name}
+                            </h3>
+                            <div className="text-right">
+                              <div className="text-sm font-bold text-emerald-600">{product.pricing || "Contact for Pricing"}</div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                      <CardContent className="p-6">
-                        <div className="flex justify-between items-start mb-4">
-                          <h3 className="text-xl font-bold group-hover:text-emerald-600 transition-colors">
-                            {product.name}
-                          </h3>
-                          <div className="text-right">
-                            <div className="text-sm font-bold text-emerald-600">{product.pricing}</div>
+                          <p className="text-muted-foreground mb-4 leading-relaxed text-sm">{product.description}</p>
+                          <div className="flex flex-wrap gap-1 mb-4">
+                            {product.features.slice(0, 3).map((feature: any, featureIndex: any) => (
+                              <Badge
+                                key={featureIndex}
+                                variant="outline"
+                                className="text-xs bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950 dark:to-green-950 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300"
+                              >
+                                {feature}
+                              </Badge>
+                            ))}
+                            {product.features.length > 3 && (
+                              <Badge variant="outline" className="text-xs">
+                                +{product.features.length - 3} more
+                              </Badge>
+                            )}
                           </div>
-                        </div>
-                        <p className="text-muted-foreground mb-4 leading-relaxed text-sm">{product.description}</p>
-                        <div className="flex flex-wrap gap-1 mb-4">
-                          {product.features.slice(0, 3).map((feature, featureIndex) => (
-                            <Badge
-                              key={featureIndex}
-                              variant="outline"
-                              className="text-xs bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950 dark:to-green-950 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300"
-                            >
-                              {feature}
-                            </Badge>
-                          ))}
-                          {product.features.length > 3 && (
-                            <Badge variant="outline" className="text-xs">
-                              +{product.features.length - 3} more
-                            </Badge>
-                          )}
-                        </div>
-                        <Button
-                          className={`w-full bg-gradient-to-r ${product.gradient} hover:opacity-90 shadow-lg hover:shadow-xl transition-all duration-300`}
-                        >
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          {product.cta}
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </div>
-                ))}
+                          <Button
+                            className="w-full text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                            style={{
+                              background: index === 0 ? `linear-gradient(to right, rgb(16 185 129), rgb(34 197 94), rgb(20 184 166))` :
+                                index === 1 ? `linear-gradient(to right, rgb(236 72 153), rgb(244 63 94), rgb(168 85 247))` :
+                                  index === 2 ? `linear-gradient(to right, rgb(245 158 11), rgb(249 115 22), rgb(239 68 68))` :
+                                    `linear-gradient(to right, rgb(59 130 246), rgb(6 182 212), rgb(99 102 241))`
+                            }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleProductClick(product.link);
+                            }}
+                          >
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            {product.cta}
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -212,9 +305,8 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
               {products.map((_, index) => (
                 <button
                   key={index}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentProductIndex ? "bg-emerald-500 w-6" : "bg-gray-300 dark:bg-gray-600"
-                  }`}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentProductIndex ? "bg-emerald-500 w-6" : "bg-gray-300 dark:bg-gray-600"
+                    }`}
                   onClick={() => setCurrentProductIndex(index)}
                 />
               ))}
@@ -242,5 +334,5 @@ export function SaaSProducts({ className, products = SAAS_PRODUCTS }: SaaSProduc
         </div>
       </div>
     </section>
-  )
+  );
 }

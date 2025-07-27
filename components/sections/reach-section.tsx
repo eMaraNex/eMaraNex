@@ -16,7 +16,7 @@ const reachStats = [
     shadow: "hover:shadow-emerald-500/20",
   },
   {
-    value: "1M+",
+    value: "500K+",
     label: "Impressions",
     description: "Demographics",
     gradient: "from-blue-900 to-cyan-900",
